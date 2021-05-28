@@ -27,7 +27,7 @@ namespace TwoTanks
             twoTanks.Calc();
             chPlot.Series[0].Points.AddXY(twoTanks.Time, twoTanks.Out1);
             chPlot.Series[1].Points.AddXY(twoTanks.Time, twoTanks.Out2);
-           
+
 
             if (chPlot.Series[0].Points.Count >= chartLimit)
             {
@@ -215,6 +215,34 @@ namespace TwoTanks
             btnDownIn1.Enabled = twoTanks.pid.IsManual;
             tbValveIn1.Enabled = twoTanks.pid.IsManual;
             tbValveIn1.Text = twoTanks.ValveIn1.ToString("F2");
+        }
+
+        private void ShowOptimization(double dt, double maxtime, double setpoint, double[] variables, int series)
+        {
+            ControlSystem sys = new ControlSystem(dt);
+            sys.pid.K = variables[0];
+            sys.pid.Ti = variables[1];
+            sys.pid.Kd = variables[2];
+            sys.SetPoint = setpoint;
+            var stepCnt = (int)(maxtime / dt);
+
+            for (int i = 0; i < stepCnt; i++)
+            {
+                
+                chPlot.Series[series].Points.AddXY(sys.Time, sys.Out1);
+                sys.Calc();
+            }
+        }
+
+        private void btnOptimization_Click(object sender, EventArgs e)
+        {
+            var startParam = new double[] { 1, 50, 0 };
+            var I1 = Criteria.I2Criteria(startParam);
+            ShowOptimization(1, 50, 6, startParam, 0);
+            var optimizationResult = CD.descent_method(Criteria.I2Criteria, startParam, 0.01, 10000);
+            ShowOptimization(1, 50, 6, optimizationResult, 2);
+            var I2 = Criteria.I2Criteria(optimizationResult);
+
         }
     }
 }

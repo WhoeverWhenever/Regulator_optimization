@@ -51,6 +51,8 @@
     <Compile Include="ClampBlock.cs" />
     <Compile Include="ComplexBlock.cs" />
     <Compile Include="ControlSystem.cs" />
+    <Compile Include="CoordinateDescent.cs" />
+    <Compile Include="Criteria.cs" />
     <Compile Include="DelayBlock.cs" />
     <Compile Include="DiffBlock.cs" />
     <Compile Include="IntBlock.cs" />

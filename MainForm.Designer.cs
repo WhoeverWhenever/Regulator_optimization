@@ -32,10 +32,11 @@ namespace TwoTanks
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.chPlot = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tmModeling = new System.Windows.Forms.Timer(this.components);
@@ -70,6 +71,7 @@ namespace TwoTanks
             this.btnSPDown = new System.Windows.Forms.Button();
             this.lbSetPoint = new System.Windows.Forms.Label();
             this.btnMode = new System.Windows.Forms.Button();
+            this.btnOptimization = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chPlot)).BeginInit();
             this.SuspendLayout();
@@ -89,22 +91,27 @@ namespace TwoTanks
             this.chPlot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.Name = "ChartArea1";
-            this.chPlot.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chPlot.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.chPlot.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chPlot.Legends.Add(legend2);
             this.chPlot.Location = new System.Drawing.Point(71, 240);
             this.chPlot.Name = "chPlot";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series1.Legend = "Legend1";
-            series1.Name = "Z1";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series2.Legend = "Legend1";
-            series2.Name = "Z2";
-            this.chPlot.Series.Add(series1);
-            this.chPlot.Series.Add(series2);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series4.Legend = "Legend1";
+            series4.Name = "Z1";
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series5.Legend = "Legend1";
+            series5.Name = "Z2";
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series6.Legend = "Legend1";
+            series6.Name = "Optimized";
+            this.chPlot.Series.Add(series4);
+            this.chPlot.Series.Add(series5);
+            this.chPlot.Series.Add(series6);
             this.chPlot.Size = new System.Drawing.Size(812, 299);
             this.chPlot.TabIndex = 1;
             this.chPlot.Text = "chPlot";
@@ -420,11 +427,23 @@ namespace TwoTanks
             this.btnMode.UseVisualStyleBackColor = true;
             this.btnMode.Click += new System.EventHandler(this.btnMode_Click);
             // 
+            // btnOptimization
+            // 
+            this.btnOptimization.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOptimization.Location = new System.Drawing.Point(893, 366);
+            this.btnOptimization.Name = "btnOptimization";
+            this.btnOptimization.Size = new System.Drawing.Size(75, 43);
+            this.btnOptimization.TabIndex = 35;
+            this.btnOptimization.Text = "Optimize";
+            this.btnOptimization.UseVisualStyleBackColor = true;
+            this.btnOptimization.Click += new System.EventHandler(this.btnOptimization_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(988, 551);
+            this.Controls.Add(this.btnOptimization);
             this.Controls.Add(this.btnMode);
             this.Controls.Add(this.lbSetPoint);
             this.Controls.Add(this.tbSetPoint);
@@ -509,6 +528,7 @@ namespace TwoTanks
         private System.Windows.Forms.Button btnSPDown;
         private System.Windows.Forms.Label lbSetPoint;
         private System.Windows.Forms.Button btnMode;
+        private System.Windows.Forms.Button btnOptimization;
     }
 }
 

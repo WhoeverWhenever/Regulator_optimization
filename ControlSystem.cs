@@ -36,6 +36,7 @@ namespace TwoTanks
         public double ValveOut1 { get { return valveOut1; } set { valveOut1 = clampInput.Calc(value); } }
 
         public double SetPoint { get; set; }
+        public double E { get; set; }
 
         private APBlock Tank1;
         private APBlock Tank2;
@@ -66,10 +67,11 @@ namespace TwoTanks
         {
          
             Time += dt;
+            E = SetPoint - out1;
 
             if (!pid.IsManual)
             {
-                ValveIn1 = pid.Calc(SetPoint - out1);
+                ValveIn1 = pid.Calc(E);
             }
             double input1 = 100.25 * ValveIn1 + 92.3 * ValveIn2 - 152.26 * Valve12 + 0.96 * Out2;
             out1 = Tank1.Calc(input1);
